@@ -8,7 +8,7 @@ export default function App() {
     // if timer is running then increase timer by 1
     if (isRunning) {
       intervalId = setInterval(() => setTime(time + 1), 1000);
-    }
+    } else clearInterval(intervalId);
 
     const updateTime = () => clearInterval(intervalId);
 
@@ -27,14 +27,14 @@ export default function App() {
 
   let min = Math.floor((time % 6000) / 60);
   let sec = time % 60;
-  console.log(time*1000)
+  // console.log(time*1000)
 
   return (
     <div className="App">
       <h1>Stopwatch</h1>
       <p>
-        {/* .toString().padStart(2, "0") */}
-        Time: {min}:{sec.toString().padStart(2, "0")} 
+        Time: {min}:{sec < 10 ? "0" : ""}
+        {sec}
       </p>
       <button onClick={toggleTimer}>{isRunning ? "Stop" : "Start"}</button>
       <button onClick={handleReset}>Reset</button>
